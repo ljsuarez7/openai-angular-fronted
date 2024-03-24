@@ -6,20 +6,20 @@
             
             <!-- Chat Messages -->
             <app-chat-message
-                text="¿Escribe el texto que quieres que revise?"
+                text="Escribe el texto que quieres que revise"
             />
 
             @for (message of messages(); track $index) {
                 @if (message.isGpt) {
-                    <app-chat-message [text]="message.text" />
+                    <app-gpt-message-orthography
+                        [text]="message.text"
+                        [errors]="message.info!.errors"
+                        [userScore]="message.info!.userScore"
+                    />
                 }@else {
                     <app-my-message [text]="message.text" />
                 }
             }
-
-            <app-my-message
-                text="Hola"
-            />
 
             @if (isLoading()) {
                 <app-typing-loader />
@@ -31,20 +31,10 @@
 
     <!-- MessageBox -->
 
-    <!-- <app-text-message-box 
+    <app-text-message-box 
         placeholder="Escribe aqui lo que deseas" 
         (onMessage)="handleMessage($event)"
-    /> -->
-
-    <!-- <app-text-message-box-file 
-        placeholder="Escribe aqui lo que deseas" 
-        (onMessage)="handleMessageWithFile($event)"
-    /> -->
-
-    <app-text-message-box-select 
-        placeholder="Escribe aqui lo que deseas" 
-        [options]="[{id: '1', text: 'Uno'}, {id: '2', text: 'Dos'}]"
-        (onMessage)="handleMessageWithSelect($event)"
+        [disableCorrections]="true"
     />
 
 </div>
