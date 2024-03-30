@@ -26,9 +26,9 @@ export class ChatTemplateComponent {
   
   public openAiService = inject(OpenAiService);
 
-  handleMessage(propmt: string){
+  handleMessage(prompt: string){
 
-    console.log({propmt});
+    console.log({prompt});
 
   }
 
